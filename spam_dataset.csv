@@ -1,0 +1,7 @@
+text,label
+"Congratulations! You won a free gift card. Click now",spam
+"Verify your bank account immediately",spam
+"Urgent! Login to avoid suspension",spam
+"Hey, are we still meeting today?",ham
+"Your OTP for login is 839201",ham
+"Can you send me the assignment?",ham
