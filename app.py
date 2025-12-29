@@ -3,6 +3,7 @@
 # Purpose: Educational & Defensive Cybersecurity Use Only
 
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import pandas as pd
 import joblib
 import os
@@ -20,6 +21,21 @@ MODEL_PATH = "spam_model.pkl"
 VECTORIZER_PATH = "vectorizer.pkl"
 
 app = Flask(__name__)
+
+# -----------------------------
+# CORS Configuration
+# -----------------------------
+CORS(app, resources={
+    r"/check-spam": {
+        "origins": [
+            "http://localhost:5173",
+            "https://vyomasecurity.vercel.app"
+        ]
+    },
+    r"/": {
+        "origins": "*"
+    }
+})
 
 # -----------------------------
 # Train Model (if not exists)
@@ -98,9 +114,8 @@ def check_spam():
 
 
 # -----------------------------
-# Run App
+# Run App (Render compatible)
 # -----------------------------
 if __name__ == "__main__":
-    import os
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
